@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\nglin\\Downloads\\core (1).jar",
+        "c:\\Users\\nglin\\Downloads\\core.jar"
+    ]
+}
