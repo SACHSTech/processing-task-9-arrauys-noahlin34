@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
-	
+
   boolean boolMousePressed = false;
 
   float[] circleY = new float[15];
@@ -130,7 +130,7 @@ public class Sketch extends PApplet {
         circleHideStatus[i] = true;
       }
 
-      if(lives == 0) {
+      if(lives <= 0) {
         background(255);
       }
 
