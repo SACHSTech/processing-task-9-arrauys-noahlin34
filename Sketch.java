@@ -1,7 +1,22 @@
 import processing.core.PApplet;
 
+
+
+
+/**
+ * 
+ * @author  Noah Lin  
+ * 
+ * This is a game with falling snow. You must move the player and click snowballs to remove them to avoid getting hit.
+ * Get hit 3 times, and the game ends. 
+ * 
+ * 
+ */
+
 public class Sketch extends PApplet {
 
+
+  //declaring variables
   boolean boolMousePressed = false;
 
   float[] circleY = new float[15];
@@ -19,7 +34,7 @@ public class Sketch extends PApplet {
 
 
 
-  int lives = 3;
+  int intLives = 3;
 
 
 	
@@ -34,10 +49,12 @@ public class Sketch extends PApplet {
   /** 
    * Called once at the beginning of execution.  Add initial set up
    * values here i.e background, stroke, fill etc.
+   * Sets values for the required arrays. 
    */
   public void setup() {
     background(210, 255, 173);
 
+    //for loops to set random values to circle coordinate arrays, and set all the circle hide statuses to false 
     for (int i = 0; i < circleY.length; i++) {
       circleY[i] = random(height);
     }
@@ -60,6 +77,7 @@ public class Sketch extends PApplet {
     
     background(50);
 
+    //input control if statements
     if(boolUpPressed) {
       fltCharacterPosY = fltCharacterPosY - 2;
     }
@@ -74,6 +92,7 @@ public class Sketch extends PApplet {
     }
 
 
+    //draws the blue player circle 
     fill(0, 0, 255);
     ellipse(fltCharacterPosX, fltCharacterPosY, 20, 20);
 
@@ -83,8 +102,8 @@ public class Sketch extends PApplet {
 
 
 
-	  
-	  for(int i = 0; i < lives; i++) {
+	  //for loop to draw lives
+	  for(int i = 0; i < intLives; i++) {
       fill(255, 0, 0);
       rect(squareX[i], 20, 20, 20);
     }
@@ -92,6 +111,7 @@ public class Sketch extends PApplet {
     
 
 
+    //for loop to draw nad move cifrcles, as well as handle resetting position and clicking input handling
     fill(255, 255, 255);
     for (int i = 0; i < circleY.length; i++) {
 
@@ -110,6 +130,7 @@ public class Sketch extends PApplet {
         circleX[i] = 0;
       }
 
+      //input
       if(keyPressed){
         if(keyCode == DOWN) {
           circleY[i]++;
@@ -120,9 +141,9 @@ public class Sketch extends PApplet {
       }
 
 
-
+      //collision detection if statements
       if (dist(fltCharacterPosX, fltCharacterPosY, circleX[i], circleY[i]) <= 15 && circleHideStatus[i] == false) {
-        lives--;
+        intLives--;
         circleHideStatus[i] = true;
       }
 
@@ -130,7 +151,8 @@ public class Sketch extends PApplet {
         circleHideStatus[i] = true;
       }
 
-      if(lives <= 0) {
+      //white screen when running out of lives 
+      if(intLives <= 0) {
         background(255);
       }
 
@@ -138,6 +160,10 @@ public class Sketch extends PApplet {
 
   }
 
+  /**
+   * This method is used to handle user input, changing a boolean depending on which wasd key is pressed 
+   * 
+   */
   public void keyPressed() {
     if(key == 'w') {
       boolUpPressed = true;
@@ -153,6 +179,10 @@ public class Sketch extends PApplet {
     }
   }
 
+  /**
+   * This method is also used to handle input, changing a boolean value when the wasd keys are released 
+   * 
+   */
   public void keyReleased() {
     if(key == 'w') {
       boolUpPressed = false;
